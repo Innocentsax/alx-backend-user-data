@@ -1,7 +1,6 @@
 # 0x00. Personal data
 
-![](https://fusionauth.io/assets/img/advice/guide-user-data-security-article.png)
-
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3G8iBX34R5VO0h_xCVITlikBjpvf-j_mpJA&usqp=CAU" width="800" hight="300">
 ## Resources
 
 **Read or watch:**
