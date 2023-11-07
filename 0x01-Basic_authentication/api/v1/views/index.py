@@ -5,27 +5,6 @@ from flask import jsonify, abort
 from api.v1.views import app_views
 
 
-# unauthorized access
-@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
-def unauthorized() -> str:
-    """_summary_
-
-    Returns:
-        str: _description_
-    """
-    abort(401, description='Unauthorized')
-
-# forbidden
-@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
-def forbidden() -> str:
-    """_summary_
-
-    Returns:
-        str: _description_
-    """
-    abort(403, description='Forbidden')
-
-
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
 def status() -> str:
     """ GET /api/v1/status
@@ -45,3 +24,21 @@ def stats() -> str:
     stats = {}
     stats['users'] = User.count()
     return jsonify(stats)
+
+
+@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
+def unauthorized() -> str:
+    """ GET /api/v1/unauthorized
+    Return:
+      - raises a 401 error by using abort
+    """
+    abort(401)
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden() -> str:
+    """ GET /api/v1/forbidden
+    Return:
+      - raises a 403 error by using abort
+    """
+    abort(403)
