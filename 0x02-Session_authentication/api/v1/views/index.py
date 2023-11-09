@@ -1,12 +1,47 @@
 #!/usr/bin/env python3
-""" DocDocDocDocDocDoc
+""" Module of Index views
 """
-from flask import Blueprint
+from flask import jsonify, abort
+from api.v1.views import app_views
 
-app_views = Blueprint("app_views", __name__, url_prefix="/api/v1")
 
-from api.v1.views.index import *
-from api.v1.views.users import *
-from api.v1.views.session_auth import *
+# unauthorized access
+@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
+def unauthorized() -> str:
+    """_summary_
 
-User.load_from_file()
+    Returns:
+        str: _description_
+    """
+    abort(401, description='Unauthorized')
+
+# forbidden
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden() -> str:
+    """_summary_
+
+    Returns:
+        str: _description_
+    """
+    abort(403, description='Forbidden')
+
+
+@app_views.route('/status', methods=['GET'], strict_slashes=False)
+def status() -> str:
+    """ GET /api/v1/status
+    Return:
+      - the status of the API
+    """
+    return jsonify({"status": "OK"})
+
+
+@app_views.route('/stats/', strict_slashes=False)
+def stats() -> str:
+    """ GET /api/v1/stats
+    Return:
+      - the number of each objects
+    """
+    from models.user import User
+    stats = {}
+    stats['users'] = User.count()
+    return jsonify(stats)
